@@ -31,8 +31,8 @@ class ProductCreate(CreateView):
 class ProductUpdate(UpdateView):
     """Редактирование продукта"""
     model = Product
+    form_class = ProductForm
     template_name = "products/products-edit.html"
-    fields = "__all__"
 
     def get_success_url(self):
         return self.object.get_absolute_url()
