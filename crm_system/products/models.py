@@ -16,4 +16,4 @@ class Product(models.Model):
         return reverse_lazy("products:product-detail", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return f"Product {self.pk}, {self.name}"
+        return f"{self.name}"

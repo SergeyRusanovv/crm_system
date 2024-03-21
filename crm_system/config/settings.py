@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'advertising',
     'django_extensions',
     'debug_toolbar',
+    'leads',
 ]
 
 MIDDLEWARE = [
