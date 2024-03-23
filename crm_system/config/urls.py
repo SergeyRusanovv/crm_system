@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from config import settings
 
 urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
@@ -23,5 +25,8 @@ urlpatterns = [
     path("", include("registration.urls")),
     path("products/", include("products.urls")),
     path("ads/", include("advertising.urls")),
-    path("leads/", include("leads.urls"))
+    path("leads/", include("leads.urls")),
+    path("contracts/", include("contracts.urls")),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -27,22 +27,22 @@
         </div>
         <ul class="list-unstyled px-2">
             {% if perms.products.view_product %}
-            <li><a href="{% url "products:products" %} " class="bar-item text-decoration-none px-3 py-3 d-block">
+            <li><a href="{% url 'products:products' %} " class="bar-item text-decoration-none px-3 py-3 d-block">
                 <span><i class="fas fa-microchip"></i></span><span class="ml-1"> Услуги</span>
             </a></li>
             {% endif %}
             {% if perms.advertisements.view_advertisement %}
-            <li><a href="{% url "advertising:ads-list" %}" class="bar-item text-decoration-none px-3 py-3 d-block">
+            <li><a href="{% url 'advertising:ads-list' %}" class="bar-item text-decoration-none px-3 py-3 d-block">
                 <span><i class="fas fa-ad"></i></span><span class="ml-1"> Рекламные компании</span>
             </a></li>
             {% endif %}
             {% if perms.leads.view_lead %}
-            <li><a href="{% url "leads:leads-list" %}" class="bar-item text-decoration-none px-3 py-3 d-block">
+            <li><a href="{% url 'leads:leads-list' %}" class="bar-item text-decoration-none px-3 py-3 d-block">
                 <span><i class="fas fa-user-clock"></i></span><span class="px-1"> Лиды</span>
             </a></li>
             {% endif %}
             {% if perms.contracts.view_contract %}
-            <li><a href="/contracts/" class="bar-item text-decoration-none px-3 py-3 d-block">
+            <li><a href="{% url 'contracts:contracts-list' %}" class="bar-item text-decoration-none px-3 py-3 d-block">
                 <span><i class="fas fa-file-alt"></i></span><span class="px-1"> Контракты</span>
             </a></li>
             {% endif %}

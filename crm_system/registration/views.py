@@ -1,6 +1,4 @@
 from django.contrib.auth.views import LoginView
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView
 from .forms import RegisterForm
