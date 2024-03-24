@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% load divide_filter %}
 
 {% block content %}
 <h2 class="fw-bold">Статистика рекламных компаний</h2>
@@ -8,7 +9,7 @@
             {% for ad in ads %}
             <li class="list-group-item list-group-item-light d-flex justify-content-between">
                 <a href="/ads/{{ ad.pk }}" class="text-decoration-none link-dark">{{ ad.name }}</a>
-                <p>Лидов: {{ ad.leads_count }} | Активных клиентов: {{ ad.customers_count }} | Соотношение контрактов к затратам: {{ ad.profit|default_if_none:"-" }}</p>
+                <p>Лидов: {{ ad.clients_count }} | Активных клиентов: {{ ad.active_clients_count }} | Соотношение контрактов к затратам: {% divide ad.total_income ad.total_expenses %} </p>
             </li>
             {% endfor %}
         </ul>

@@ -47,7 +47,7 @@
             </a></li>
             {% endif %}
             {% if perms.customers.view_customer %}
-            <li><a href="/customers/" class="bar-item text-decoration-none px-3 py-3 d-block">
+            <li><a href="{% url 'customers:customers-list' %}" class="bar-item text-decoration-none px-3 py-3 d-block">
                 <span><i class="fas fa-user-check"></i></span><span class="px-1"> Активные клиенты</span>
             </a></li>
             {% endif %}
