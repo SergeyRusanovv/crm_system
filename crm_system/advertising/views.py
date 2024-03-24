@@ -1,4 +1,5 @@
-from django.db.models import Count, Sum, F, Prefetch
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.db.models import Count, Sum, Prefetch
 from django.urls import reverse_lazy
 from django.views import generic
 from products.models import Product
@@ -6,14 +7,14 @@ from .models import AdvertisingCompany
 from .forms import AdsForm
 
 
-class AdsList(generic.ListView):
+class AdsList(LoginRequiredMixin, generic.ListView):
     """Просмотр всех рекламных компаний"""
     model = AdvertisingCompany
     template_name = "ads/ads-list.html"
     context_object_name = "ads"
 
 
-class AdsDetail(generic.DetailView):
+class AdsDetail(UserPassesTestMixin, generic.DetailView):
     """Детальный просмотр рекламной компании"""
     model = AdvertisingCompany
     template_name = "ads/ads-detail.html"
@@ -24,8 +25,11 @@ class AdsDetail(generic.DetailView):
         data["ads"] = ads
         return data
 
+    def test_func(self):
+        return self.request.user.groups.filter(name="marketolog").exists()
 
-class AdsCreate(generic.CreateView):
+
+class AdsCreate(UserPassesTestMixin, generic.CreateView):
     """Создание рекламной компании"""
     form_class = AdsForm
     model = AdvertisingCompany
@@ -34,8 +38,11 @@ class AdsCreate(generic.CreateView):
     def get_success_url(self):
         return self.object.get_absolute_url()
 
+    def test_func(self):
+        return self.request.user.groups.filter(name="marketolog").exists()
 
-class AdsUpdate(generic.UpdateView):
+
+class AdsUpdate(UserPassesTestMixin, generic.UpdateView):
     """Изменение рекламной компании"""
     model = AdvertisingCompany
     form_class = AdsForm
@@ -45,13 +52,19 @@ class AdsUpdate(generic.UpdateView):
     def get_success_url(self):
         return self.object.get_absolute_url()
 
+    def test_func(self):
+        return self.request.user.groups.filter(name="marketolog").exists()
 
-class AdsDelete(generic.DeleteView):
+
+class AdsDelete(UserPassesTestMixin, generic.DeleteView):
     """Удаление рекламной компании"""
     model = AdvertisingCompany
     template_name = "ads/ads-delete.html"
     success_url = reverse_lazy("advertising:ads-list")
     context_object_name = "ads"
+
+    def test_func(self):
+        return self.request.user.groups.filter(name="marketolog").exists()
 
 
 class Statistic(generic.ListView):

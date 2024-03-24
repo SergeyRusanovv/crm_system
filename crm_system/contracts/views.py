@@ -1,16 +1,20 @@
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views import generic
 from .models import Contract
 
 
-class ContractList(generic.ListView):
+class ContractList(UserPassesTestMixin, generic.ListView):
     """Просмотр контрактов"""
     template_name = "contracts/contracts-list.html"
     model = Contract
     context_object_name = "contracts"
 
+    def test_func(self):
+        return self.request.user.groups.filter(name='manager').exists()
 
-class ContractDetail(generic.DetailView):
+
+class ContractDetail(UserPassesTestMixin, generic.DetailView):
     """Детальный просмотр контрактов"""
     template_name = "contracts/contracts-detail.html"
     model = Contract
@@ -21,8 +25,11 @@ class ContractDetail(generic.DetailView):
         data["contract"] = contract
         return data
 
+    def test_func(self):
+        return self.request.user.groups.filter(name='manager').exists()
 
-class ContractCreate(generic.CreateView):
+
+class ContractCreate(UserPassesTestMixin, generic.CreateView):
     """Создание контракта"""
     template_name = "contracts/contracts-create.html"
     model = Contract
@@ -31,8 +38,11 @@ class ContractCreate(generic.CreateView):
     def get_success_url(self):
         return self.object.get_absolute_url()
 
+    def test_func(self):
+        return self.request.user.groups.filter(name='manager').exists()
 
-class ContractUpdate(generic.UpdateView):
+
+class ContractUpdate(UserPassesTestMixin, generic.UpdateView):
     """Изменение контракта"""
     template_name = "contracts/contracts-edit.html"
     model = Contract
@@ -42,10 +52,16 @@ class ContractUpdate(generic.UpdateView):
     def get_success_url(self):
         return self.object.get_absolute_url()
 
+    def test_func(self):
+        return self.request.user.groups.filter(name='manager').exists()
 
-class ContractDelete(generic.DeleteView):
+
+class ContractDelete(UserPassesTestMixin, generic.DeleteView):
     """Удаление контракта"""
     template_name = "contracts/contracts-delete.html"
     model = Contract
     context_object_name = "contract"
     success_url = reverse_lazy("contracts:contracts-list")
+
+    def test_func(self):
+        return self.request.user.groups.filter(name='manager').exists()
