@@ -1,3 +1,5 @@
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView
@@ -8,7 +10,8 @@ from customers.models import ActiveLead
 from leads.models import Leads
 
 
-class HomeView(TemplateView):
+class HomeView(TemplateView, LoginRequiredMixin):
+    """Домашняя страница"""
     template_name = "users/index.html"
 
     def get_context_data(self, **kwargs):
@@ -21,10 +24,20 @@ class HomeView(TemplateView):
 
 
 class RegisterUser(CreateView):
+    """Регистрация пользователя"""
     form_class = RegisterForm
     template_name = "registration/registration.html"
     success_url = reverse_lazy("registration:home")
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password1']
+        user = authenticate(username=username, password=password)
+        login(self.request, user)
+        return response
+
 
 class Login(LoginView):
+    """Аутентификация пользователя"""
     template_name = "registration/login.html"
