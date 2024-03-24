@@ -4,12 +4,14 @@ from .models import Contract
 
 
 class ContractList(generic.ListView):
+    """Просмотр контрактов"""
     template_name = "contracts/contracts-list.html"
     model = Contract
     context_object_name = "contracts"
 
 
 class ContractDetail(generic.DetailView):
+    """Детальный просмотр контрактов"""
     template_name = "contracts/contracts-detail.html"
     model = Contract
 
@@ -21,6 +23,7 @@ class ContractDetail(generic.DetailView):
 
 
 class ContractCreate(generic.CreateView):
+    """Создание контракта"""
     template_name = "contracts/contracts-create.html"
     model = Contract
     fields = "__all__"
@@ -30,6 +33,7 @@ class ContractCreate(generic.CreateView):
 
 
 class ContractUpdate(generic.UpdateView):
+    """Изменение контракта"""
     template_name = "contracts/contracts-edit.html"
     model = Contract
     fields = "__all__"
@@ -40,6 +44,7 @@ class ContractUpdate(generic.UpdateView):
 
 
 class ContractDelete(generic.DeleteView):
+    """Удаление контракта"""
     template_name = "contracts/contracts-delete.html"
     model = Contract
     context_object_name = "contract"

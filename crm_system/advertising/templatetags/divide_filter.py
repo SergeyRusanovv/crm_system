@@ -5,6 +5,7 @@ register = template.Library()
 
 @register.simple_tag(name="divide")
 def divide(value, arg):
+    """Кастомный тэг для деления двух аргументов"""
     try:
         div = int(value) / int(arg)
         return round(div, 2)

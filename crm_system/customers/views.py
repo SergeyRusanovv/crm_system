@@ -4,6 +4,7 @@ from .models import ActiveLead
 
 
 class CustomersList(generic.ListView):
+    """Просмотр активных клиентов"""
     model = ActiveLead
     template_name = "customers/customers-list.html"
 
@@ -15,6 +16,7 @@ class CustomersList(generic.ListView):
 
 
 class CustomerDetail(generic.DetailView):
+    """Детальный просмотр активного клиента"""
     model = ActiveLead
     template_name = "customers/customers-detail.html"
 
@@ -26,6 +28,7 @@ class CustomerDetail(generic.DetailView):
 
 
 class CustomerCreate(generic.CreateView):
+    """Создание активного клиента"""
     model = ActiveLead
     fields = "__all__"
     context_object_name = "customer"
@@ -36,6 +39,7 @@ class CustomerCreate(generic.CreateView):
 
 
 class CustomerUpdate(generic.UpdateView):
+    """Изменение активного клиента"""
     model = ActiveLead
     fields = "__all__"
     context_object_name = "customer"
@@ -46,6 +50,7 @@ class CustomerUpdate(generic.UpdateView):
 
 
 class CustomerDelete(generic.DeleteView):
+    """Удаление активного клиента"""
     model = ActiveLead
     template_name = "customers/customers-delete.html"
     context_object_name = "customer"

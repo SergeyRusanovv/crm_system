@@ -6,12 +6,16 @@
 <div class="row bg-white px-3 py-3 mx-2 my-5 rounded pb-5 shadow-lg">
     <div class="col">
         <ul class="list-group">
-            {% for ad in ads %}
-            <li class="list-group-item list-group-item-light d-flex justify-content-between">
-                <a href="/ads/{{ ad.pk }}" class="text-decoration-none link-dark">{{ ad.name }}</a>
-                <p>Лидов: {{ ad.clients_count }} | Активных клиентов: {{ ad.active_clients_count }} | Соотношение контрактов к затратам: {% divide ad.total_income ad.total_expenses %} </p>
-            </li>
-            {% endfor %}
+            {% if ads %}
+                {% for ad in ads %}
+                <li class="list-group-item list-group-item-light d-flex justify-content-between">
+                    <a href="/ads/{{ ad.pk }}" class="text-decoration-none link-dark">{{ ad.name }}</a>
+                    <p>Лидов: {{ ad.clients_count }} | Активных клиентов: {{ ad.active_clients_count }} | Соотношение контрактов к затратам: {% divide ad.total_income ad.total_expenses %} </p>
+                </li>
+                {% endfor %}
+            {% else %}
+                <p>Еще нет рекламных компаний</p>
+            {% endif %}
         </ul>
     </div>
 </div>

@@ -7,12 +7,14 @@ from .forms import AdsForm
 
 
 class AdsList(generic.ListView):
+    """Просмотр всех рекламных компаний"""
     model = AdvertisingCompany
     template_name = "ads/ads-list.html"
     context_object_name = "ads"
 
 
 class AdsDetail(generic.DetailView):
+    """Детальный просмотр рекламной компании"""
     model = AdvertisingCompany
     template_name = "ads/ads-detail.html"
 
@@ -24,6 +26,7 @@ class AdsDetail(generic.DetailView):
 
 
 class AdsCreate(generic.CreateView):
+    """Создание рекламной компании"""
     form_class = AdsForm
     model = AdvertisingCompany
     template_name = "ads/ads-create.html"
@@ -33,6 +36,7 @@ class AdsCreate(generic.CreateView):
 
 
 class AdsUpdate(generic.UpdateView):
+    """Изменение рекламной компании"""
     model = AdvertisingCompany
     form_class = AdsForm
     template_name = "ads/ads-edit.html"

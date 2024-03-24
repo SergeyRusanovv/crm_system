@@ -5,18 +5,21 @@ from .forms import LeadsForm
 
 
 class LeadsList(generic.ListView):
+    """Просмотр потенциальных клиентов"""
     model = Leads
     template_name = "leads/leads-list.html"
     context_object_name = "leads"
 
 
 class LeadsDetail(generic.DetailView):
+    """Детальный просмотр потенциального клиента"""
     model = Leads
     template_name = "leads/leads-detail.html"
     context_object_name = "lead"
 
 
 class LeadsCreate(generic.CreateView):
+    """Создание потенциального клиента"""
     model = Leads
     template_name = "leads/leads-create.html"
     form_class = LeadsForm
@@ -26,6 +29,7 @@ class LeadsCreate(generic.CreateView):
 
 
 class LeadsUpdate(generic.UpdateView):
+    """Изменение потенциального клиента"""
     model = Leads
     template_name = "leads/leads-edit.html"
     form_class = LeadsForm
@@ -36,6 +40,7 @@ class LeadsUpdate(generic.UpdateView):
 
 
 class LeadsDelete(generic.DeleteView):
+    """Удаление потенциального клиента"""
     model = Leads
     template_name = "leads/leads-delete.html"
     success_url = reverse_lazy("leads:leads-list")

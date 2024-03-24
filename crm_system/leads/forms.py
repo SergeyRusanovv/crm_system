@@ -6,7 +6,7 @@ class LeadsForm(forms.ModelForm):
 
     class Meta:
         model = Leads
-        fields = "first_name", "last_name", "phone", "advertising"
+        fields = "first_name", "last_name", "phone", "advertising", "email"
         widgets = {
             "first_name": forms.TextInput(
                 attrs={
@@ -17,7 +17,6 @@ class LeadsForm(forms.ModelForm):
             "last_name": forms.TextInput(
                 attrs={
                     "placeholder": "Введите Отчество (при наличии)",
-                    "required": True,
                 }
             ),
             "phone": forms.TextInput(
